@@ -1,8 +1,5 @@
 User-agent: *
 Allow: /
-
-# Operator analytics page
-User-agent: *
 Disallow: /dashboard/
 
 Sitemap: https://dakblizz.github.io/MissedCallStack/sitemap.xml
