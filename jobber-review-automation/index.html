@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Review Request Automation After Jobber Jobs (GHL Workflow) | MissedCallStack</title>
+  <meta name="description" content="How HVAC and home-service shops send review-request SMS after Jobber jobs using a HighLevel workflow — keep Jobber for ops, GHL for SMS, A2P-safe copy, no fake testimonials or rating guarantees.">
+  <link rel="canonical" href="../jobber-review-automation/">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Review request automation after Jobber jobs with HighLevel",
+    "description": "Keep Jobber for job close-out; use a HighLevel workflow for compliant review-request SMS after completed jobs.",
+    "step": [
+      { "@type": "HowToStep", "name": "Decide the review policy on paper" },
+      { "@type": "HowToStep", "name": "Keep close-out in Jobber" },
+      { "@type": "HowToStep", "name": "Choose a handoff into HighLevel" },
+      { "@type": "HowToStep", "name": "Build the GHL review-request workflow" },
+      { "@type": "HowToStep", "name": "Write short, A2P-safe SMS copy" },
+      { "@type": "HowToStep", "name": "QA for two weeks before peak season" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <aside class="ftc-disclosure" role="note">
+    <strong>Affiliate disclosure:</strong> MissedCallStack may earn a commission if you subscribe to HighLevel through links on this page. This guide is educational. Review volume depends on job quality, timing, and platform rules. <strong>Not a guarantee</strong> of star ratings, review count, or revenue. Not legal advice on TCPA or advertising claims.
+  </aside>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../">
+        <span class="brand-name">MissedCallStack</span>
+        <span class="brand-tag">Home-service marketing stack notes (Jobber + HighLevel)</span>
+      </a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <a href="../">Calculator</a>
+        <a href="../ghl-jobber-stack/">GHL + Jobber</a>
+        <a href="../missed-call-text-back/">Text-back setup</a>
+        <a href="../ghl-vs-answering-service/">vs Answering</a>
+        <a href="../methodology/">Methodology</a>
+        <a class="nav-cta" data-affiliate="header" href="https://www.gohighlevel.com/">Try HighLevel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../">Home</a></li>
+        <li aria-current="page">Jobber review automation</li>
+      </ol>
+    </nav>
+
+    <h1>Review request automation after Jobber jobs (GHL workflow)</h1>
+    <p class="lede">Five-star requests should fire when the invoice is paid and the tech is off the driveway — not when a CSR remembers three weeks later. Keep <strong>Jobber</strong> as the system of record for job close-out. Use <strong>HighLevel</strong> for the SMS ask, the follow-up, and the CRM trail. This page is the handoff playbook between those two.</p>
+
+    <p class="estimate-note"><strong>Sync reality check:</strong> The official Jobber↔HighLevel connection syncs client/contact fields (name, email, phone, address, tags, etc.). It does <strong>not</strong> sync jobs, notes, or attachments — see <a href="../ghl-jobber-stack/">what syncs</a>. “Job completed” is therefore a <em>process</em> you design (tag, form, Zap/Make, or CSR checkbox), not a magic toggle. SMS usage and A2P rules still apply — <a href="../ghl-sms-a2p-costs/">A2P + SMS costs</a>.</p>
+
+    <h2>Why Jobber stays the ops system</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>Close the job in Jobber</h3>
+        <ul>
+          <li>Tech marks complete / visits done</li>
+          <li>Invoice sent and (ideally) paid</li>
+          <li>Internal notes and photos stay on the property</li>
+        </ul>
+        <p style="margin:0.75rem 0 0;font-size:0.9rem;color:var(--muted)">Techs should not open a marketing CRM to “finish” a call.</p>
+      </div>
+      <div class="card">
+        <h3>Ask for the review in HighLevel</h3>
+        <ul>
+          <li>Short SMS with Google / Facebook / BBB link</li>
+          <li>One polite bump, then stop</li>
+          <li>Tag <code>review-asked</code> / <code>review-left</code> for reporting</li>
+        </ul>
+        <p style="margin:0.75rem 0 0;font-size:0.9rem;color:var(--muted)">Same LC Phone number and A2P campaign you use for text-back.</p>
+      </div>
+    </div>
+
+    <h2>Recommended workflow (contractor-sized)</h2>
+    <ol class="steps">
+      <li>
+        <h3>Decide the review policy on paper</h3>
+        <p>Write four rules the owner and CSR both sign:</p>
+        <ul>
+          <li><strong>When:</strong> e.g. same evening after paid invoice, or next morning if the job finished after 7 p.m.</li>
+          <li><strong>Who gets skipped:</strong> callbacks still open, warranty disputes, “do not SMS,” STOP’d contacts, commercial POs that ban solicitation.</li>
+          <li><strong>Which link:</strong> one primary (usually Google Business Profile). Do not shotgun three platforms in one text.</li>
+          <li><strong>How many nudges:</strong> one ask + one bump max. More feels like spam and burns segments.</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Keep close-out in Jobber</h3>
+        <p>Train techs/CSR: job → invoice → payment (or clear exception) before any review ask. If the homeowner is unhappy on-site, fix the work first — automation should never outrun the callback list.</p>
+      </li>
+      <li>
+        <h3>Choose a handoff into HighLevel</h3>
+        <p>Because job status does not sync, pick one path your shop will actually maintain:</p>
+        <ul>
+          <li><strong>CSR tag (simplest):</strong> After Jobber close, CSR opens the matched GHL contact (or creates it) and applies tag <code>job-closed-ask-review</code>. Workflow starts on tag added.</li>
+          <li><strong>Jobber custom field / checklist + weekly batch:</strong> Office pulls yesterday’s completed jobs and tags contacts in bulk — ugly but reliable for smaller shops.</li>
+          <li><strong>Middleware (Zapier / Make / etc.):</strong> Jobber “job closed” or “invoice paid” event → find/create GHL contact → add tag. Only worth it if volume makes CSR tagging a bottleneck. Budget middleware separately; it is not free HighLevel magic.</li>
+        </ul>
+        <p>Contact field sync helps matching once the Jobber client exists in GHL — it does not replace the close-out trigger.</p>
+      </li>
+      <li>
+        <h3>Build the GHL review-request workflow</h3>
+        <p>Typical HighLevel pattern:</p>
+        <ul>
+          <li><strong>Trigger:</strong> tag <code>job-closed-ask-review</code> added (or inbound webhook if you use middleware).</li>
+          <li><strong>Wait:</strong> 2–6 hours (or until next morning) so the text is not competing with “tech still in driveway.”</li>
+          <li><strong>If/else skip:</strong> <code>do-not-sms</code>, <code>review-asked</code> in last 90 days, open dispute tag, missing mobile, or DND hours.</li>
+          <li><strong>Send SMS</strong> (one segment if you can manage it).</li>
+          <li><strong>Tag</strong> <code>review-asked</code>; notify CSR channel optionally.</li>
+          <li><strong>Wait 3–4 days</strong> → if no <code>review-left</code> and no STOP, send one shorter bump → then end.</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Write short, A2P-safe SMS copy</h3>
+        <div class="card">
+          <p style="margin:0"><strong>Example ask (edit hard):</strong></p>
+          <p style="font-family:var(--mono);font-size:0.9rem;margin:0.75rem 0">Hi {{contact.first_name}} — thanks for choosing {{contact.company_name}} today. If we earned it, a quick Google review helps other homeowners: {{review_link}}. Reply STOP to opt out.</p>
+          <p style="margin:0;font-size:0.85rem;color:var(--muted)">Name the company. One link. No “guaranteed 5 stars.” No emoji pile that blows Unicode segment limits. Align sample copy with your A2P campaign registration.</p>
+        </div>
+        <div class="card" style="margin-top:1rem">
+          <p style="margin:0"><strong>Example bump:</strong></p>
+          <p style="font-family:var(--mono);font-size:0.9rem;margin:0.75rem 0">Quick reminder from {{contact.company_name}} — review link if you have 30 seconds: {{review_link}}. Thanks again. STOP to opt out.</p>
+        </div>
+      </li>
+      <li>
+        <h3>QA for two weeks before peak season</h3>
+        <ul>
+          <li>Run five real closed jobs through the handoff (tag or middleware).</li>
+          <li>Confirm timing, STOP, and that unhappy-job tags never get the ask.</li>
+          <li>Check segment count and wallet impact — see <a href="../ghl-sms-a2p-costs/">SMS cost notes</a>.</li>
+          <li>Verify Google link opens on iOS/Android and points at the correct GBP location.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>What not to automate</h2>
+    <ul>
+      <li><strong>Asking during an open callback:</strong> If Jobber still has a follow-up visit, wait.</li>
+      <li><strong>Incentivized “leave 5 stars for a gift card” schemes:</strong> Platform rules and local advertising law can bite; this page will not coach that.</li>
+      <li><strong>Fake or coached testimonials:</strong> Do not script star ratings. Ask for honest feedback; route complaints to a human.</li>
+      <li><strong>Blasting the whole Jobber client list:</strong> Review asks belong on recent completed work with consent-ready SMS — not a nostalgia campaign to 2019 filter-change customers.</li>
+    </ul>
+
+    <h2>How this sits next to missed-call text-back</h2>
+    <p>Same HighLevel sub-account, same registered number, different triggers:</p>
+    <ul>
+      <li><strong>Missed call / after-hours</strong> → speed-to-lead SMS (<a href="../missed-call-text-back/">setup</a>, <a href="../after-hours-hvac-routing/">night routing</a>)</li>
+      <li><strong>Job closed in Jobber</strong> → review ask (this page)</li>
+    </ul>
+    <p>Share suppression tags (<code>do-not-sms</code>, STOP handling) so a homeowner who opted out of lead texts is not “reintroduced” by a review workflow. Platform list price context: <a href="../ghl-pricing-5-truck/">5-truck GHL pricing</a>.</p>
+
+    <h2>FAQ</h2>
+    <div class="faq">
+      <details>
+        <summary>Can HighLevel detect “job completed” in Jobber automatically?</summary>
+        <p>Not via the native sync’s job objects — those do not sync. You need a tag, form, or middleware event. Treat “automatic” as “automatic after our handoff rule fires.”</p>
+      </details>
+      <details>
+        <summary>Should techs send the review link from their personal phones?</summary>
+        <p>Inconsistent, untracked, and hard on A2P brand consistency. Prefer one company LC Phone number and a logged GHL workflow. Techs can still <em>mention</em> reviews verbally; the text should come from the shop system.</p>
+      </details>
+      <details>
+        <summary>Email instead of SMS?</summary>
+        <p>Fine as a supplement for customers without mobile consent. SMS wins on open rate for residential HVAC/plumbing — just stay inside segment budget and consent rules.</p>
+      </details>
+      <details>
+        <summary>Will this guarantee more Google reviews?</summary>
+        <p><strong>No.</strong> Automation only improves consistency of the ask. Reviews still depend on job quality, timing, and the customer’s willingness. Anything else is marketing theater.</p>
+      </details>
+    </div>
+
+    <div class="btn-row">
+      <a class="btn" data-affiliate="jobber_review_page" href="https://www.gohighlevel.com/">Start HighLevel trial (affiliate)</a>
+      <a class="btn btn-secondary" href="../ghl-jobber-stack/">See GHL + Jobber sync limits</a>
+    </div>
+
+    <aside class="related">
+      <strong>Related</strong>
+      <ul>
+        <li><a href="../ghl-jobber-stack/">GHL + Jobber: what syncs</a></li>
+        <li><a href="../ghl-sms-a2p-costs/">A2P 10DLC + SMS costs in GHL</a></li>
+        <li><a href="../missed-call-text-back/">Missed-call text-back setup</a></li>
+        <li><a href="../ghl-pricing-5-truck/">GHL pricing for a 5-truck shop</a></li>
+        <li><a href="../after-hours-hvac-routing/">After-hours HVAC routing</a></li>
+        <li><a href="../">Missed-call revenue calculator</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../">Calculator</a>
+        <a href="../ghl-jobber-stack/">GHL + Jobber</a>
+        <a href="../missed-call-text-back/">Text-back</a>
+        <a href="../ghl-vs-answering-service/">vs Answering</a>
+        <a href="../ghl-pricing-5-truck/">5-truck pricing</a>
+        <a href="../after-hours-hvac-routing/">After-hours routing</a>
+        <a href="../ghl-sms-a2p-costs/">A2P + SMS costs</a>
+        <a href="../jobber-review-automation/">Jobber review automation</a>
+        <a href="../methodology/">Methodology</a>
+      </nav>
+      <div class="footer-disclosures">
+        <p><strong>Affiliate disclosure:</strong> HighLevel links may pay a commission. No review-count, rating, or income guarantees. Educational content only.</p>
+        <p><strong>Privacy note:</strong> Static site; localStorage for email MVP and analytics events.</p>
+        <p>© <span data-year>2026</span> MissedCallStack</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/config.js"></script>
+  <script src="../js/analytics.js"></script>
+  <script src="../js/site.js"></script>
+</body>
+</html>
