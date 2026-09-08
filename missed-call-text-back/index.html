@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Missed-Call Text-Back Setup in HighLevel for HVAC | MissedCallStack</title>
+  <meta name="description" content="Step-by-step missed-call text-back setup in GoHighLevel for HVAC shops: tracking numbers, workflows, SMS copy that sounds like a contractor, Jobber handoff, and QA checklist.">
+  <link rel="canonical" href="../missed-call-text-back/">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Set up missed-call text-back in HighLevel for HVAC",
+    "description": "Practical setup for home-service shops using HighLevel SMS workflows while keeping Jobber for operations.",
+    "step": [
+      { "@type": "HowToStep", "name": "Inventory numbers and after-hours rules" },
+      { "@type": "HowToStep", "name": "Connect a compliant SMS number in HighLevel" },
+      { "@type": "HowToStep", "name": "Build the missed-call workflow" },
+      { "@type": "HowToStep", "name": "Write contractor-sounding SMS copy" },
+      { "@type": "HowToStep", "name": "Hand off booked work into Jobber" },
+      { "@type": "HowToStep", "name": "QA for seven days" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <aside class="ftc-disclosure" role="note">
+    <strong>Affiliate disclosure:</strong> MissedCallStack may earn a commission if you subscribe to HighLevel through links on this page. Setup guidance is educational — results depend on your market, staffing, and compliance. Not a guarantee of bookings or revenue.
+  </aside>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../">
+        <span class="brand-name">MissedCallStack</span>
+        <span class="brand-tag">Home-service marketing stack notes (Jobber + HighLevel)</span>
+      </a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <a href="../">Calculator</a>
+        <a href="../ghl-jobber-stack/">GHL + Jobber</a>
+        <a href="../missed-call-text-back/" aria-current="page">Text-back setup</a>
+        <a href="../ghl-vs-answering-service/">vs Answering</a>
+        <a href="../methodology/">Methodology</a>
+        <a class="nav-cta" data-affiliate="header" href="https://www.gohighlevel.com/">Try HighLevel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../">Home</a></li>
+        <li aria-current="page">Missed-call text-back</li>
+      </ol>
+    </nav>
+
+    <h1>Missed-call text-back setup in GHL for HVAC</h1>
+    <p class="lede">When a homeowner’s AC dies at 7:40 p.m., the shop that texts back in under two minutes usually wins the slot — even if the truck cannot roll until morning. This is a practical GHL setup for HVAC (plumbing/electrical can clone it), written for owners who already live in Jobber.</p>
+
+    <p class="estimate-note"><strong>Compliance first:</strong> Register A2P / brand as required for your country, honor opt-outs, and do not text people who have not consented where the law requires it. This is not legal advice. Carrier filtering will nuke “BUY NOW” spam copy — write like a human dispatcher.</p>
+
+    <h2>What you are building</h2>
+    <p>A HighLevel workflow that fires when a call to your tracking or main line is missed (or goes to voicemail), sends a short SMS with a clear next step (reply or book), notifies your on-call person, and creates/updates a contact your office can push into Jobber without retyping the phone number.</p>
+
+    <ol class="steps">
+      <li>
+        <h3>Inventory numbers and after-hours rules</h3>
+        <p>List every public number: Google Business Profile, LSA, website click-to-call, truck magnets, yard signs. Decide which numbers ring the office vs. on-call. Write the after-hours policy in one sentence your CSR and techs agree on — e.g. “Emergency heat/AC diagnosis texts get a same-evening callback; non-urgent books next open slot.”</p>
+      </li>
+      <li>
+        <h3>Put a HighLevel number in the path (cleanly)</h3>
+        <p>In GHL, provision a local number (usage fees apply — see HighLevel pricing/usage docs). Forward your marketing numbers to it, or replace website CTAs gradually. Keep the Jobber/office DID for known customers if you want — many shops dual-path: ads → GHL, old customers → office. Document the diagram on one page so nobody “fixes” forwarding at 2 a.m.</p>
+      </li>
+      <li>
+        <h3>Build the missed-call workflow</h3>
+        <p>Typical pattern inside HighLevel:</p>
+        <ul>
+          <li><strong>Trigger:</strong> inbound call missed / voicemail received on the GHL number (use the call events your sub-account supports).</li>
+          <li><strong>Wait 30–90 seconds</strong> so a caller who immediately redials is not double-texted.</li>
+          <li><strong>If/else:</strong> skip SMS if contact has tag <code>do-not-sms</code> or recent outbound within 10 minutes.</li>
+          <li><strong>Send SMS</strong> (template below).</li>
+          <li><strong>Create opportunity</strong> in a “Missed Call Recovery” pipeline stage.</li>
+          <li><strong>Notify</strong> on-call via GHL app / SMS to the manager’s cell.</li>
+          <li><strong>Follow-up:</strong> if no reply in 15–30 minutes during business hours, second softer SMS or CSR task; evenings, one follow-up next morning only.</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Write SMS copy that sounds like your shop</h3>
+        <div class="card">
+          <p style="margin:0"><strong>Example (edit hard):</strong></p>
+          <p style="font-family:var(--mono);font-size:0.9rem;margin:0.75rem 0">Hi, this is {{contact.company_name}} — we just missed your call. Reply YES for a callback, or book a slot: {{booking_link}}. For no-heat / no-cool emergencies, reply URGENT. Reply STOP to opt out.</p>
+          <p style="margin:0;font-size:0.85rem;color:var(--muted)">Keep it under ~320 characters when you can. Name the trade. Never promise “tech in 20 minutes” unless you mean it in February.</p>
+        </div>
+      </li>
+      <li>
+        <h3>Hand off into Jobber (ops stays ops)</h3>
+        <p>Once the customer replies or books:</p>
+        <ul>
+          <li>CSR confirms address, equipment age, and urgency on the phone or in thread.</li>
+          <li>Create/update the <strong>Jobber client/request</strong> — if you use the official Jobber↔HighLevel sync, contact fields can flow; jobs still get built in Jobber (<a href="../ghl-jobber-stack/">what syncs</a>).</li>
+          <li>Tag the GHL contact <code>booked</code> / <code>estimate-set</code> so the workflow stops nudging.</li>
+        </ul>
+      </li>
+      <li>
+        <h3>QA for seven days</h3>
+        <ul>
+          <li>Call your own ads number from a personal cell three times (answered, missed, after-hours).</li>
+          <li>Confirm SMS arrives, links work on iPhone and Android, STOP works.</li>
+          <li>Check duplicate contacts — merge ruthlessly.</li>
+          <li>Log: missed calls, texts sent, replies, jobs booked. If reply rate is near zero, your copy or number reputation is the problem — not “SMS doesn’t work.”</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>Plumbing &amp; electrical variants</h2>
+    <p><strong>Plumbing:</strong> emphasize burst/slab leak vs. non-urgent drain — route URGENT differently. <strong>Electrical:</strong> never coach DIY on live panels in SMS; push to on-call. Same workflow skeleton; change urgency keywords and booking calendars (service vs. estimate).</p>
+
+    <h2>Where answering services still fit</h2>
+    <p>Text-back is not a full replacement for a live answering service on every shop. High-ticket emergency trades in dense metros sometimes keep a hybrid: answering service for live triage + GHL for SMS, voicemail drops, and daytime overflow. Run the numbers on the <a href="../ghl-vs-answering-service/">comparison page</a> and the <a href="../">calculator</a> — both labeled as estimates.</p>
+
+    <div class="email-capture">
+      <h3>Want the 7-day missed-call SOP as a checklist?</h3>
+      <p>Same outline as above, printable. MVP email capture stores on-device only until a free form backend is wired.</p>
+      <form data-email-capture="textback_sop" novalidate>
+        <div class="field">
+          <label for="tb-email">Work email</label>
+          <input type="email" id="tb-email" name="email" required autocomplete="email" placeholder="office@yourhvac.com">
+          <p class="form-error" role="alert"></p>
+        </div>
+        <button type="submit" class="btn">Save my request</button>
+        <p class="form-success" role="status"></p>
+      </form>
+    </div>
+
+    <div class="btn-row">
+      <a class="btn" data-affiliate="textback_page" href="https://www.gohighlevel.com/">Start HighLevel trial (affiliate)</a>
+      <a class="btn btn-secondary" href="../">Open the calculator</a>
+    </div>
+
+    <aside class="related">
+      <strong>Related</strong>
+      <ul>
+        <li><a href="../ghl-jobber-stack/">GHL + Jobber sync details</a></li>
+        <li><a href="../ghl-vs-answering-service/">GHL vs answering service math</a></li>
+        <li><a href="../methodology/">Calculator methodology</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../">Calculator</a>
+        <a href="../ghl-jobber-stack/">GHL + Jobber</a>
+        <a href="../missed-call-text-back/">Text-back</a>
+        <a href="../ghl-vs-answering-service/">vs Answering</a>
+        <a href="../methodology/">Methodology</a>
+      </nav>
+      <div class="footer-disclosures">
+        <p><strong>Affiliate disclosure:</strong> HighLevel links may pay a commission. No income guarantees. Educational content only.</p>
+        <p><strong>Privacy note:</strong> Static site; localStorage for email MVP and analytics events.</p>
+        <p>© <span data-year>2026</span> MissedCallStack</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/config.js"></script>
+  <script src="../js/analytics.js"></script>
+  <script src="../js/site.js"></script>
+</body>
+</html>

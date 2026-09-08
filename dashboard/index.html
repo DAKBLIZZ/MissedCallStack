@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Local analytics export | MissedCallStack</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <aside class="ftc-disclosure" role="note">
+    <strong>Internal:</strong> This page is for local browser event export (operators only). Not for public SEO.
+  </aside>
+  <main id="main">
+    <h1>Local analytics</h1>
+    <p>Events live in this browser’s <code>localStorage</code>. Export JSON for the ops dashboard. Canonical metrics sheet: <code>/workspace/ops-dashboard/dashboard.md</code>.</p>
+    <div class="btn-row">
+      <button type="button" class="btn" id="btn-export">Download events JSON</button>
+      <button type="button" class="btn btn-secondary" id="btn-refresh">Refresh summary</button>
+    </div>
+    <pre id="summary" class="card" style="overflow:auto;font-size:0.85rem"></pre>
+    <p><a href="../">← Back to site</a></p>
+  </main>
+  <script src="../js/config.js"></script>
+  <script src="../js/analytics.js"></script>
+  <script>
+    function show() {
+      var s = window.MCSAnalytics ? window.MCSAnalytics.summary() : { error: 'no analytics' };
+      var subs = [];
+      try { subs = JSON.parse(localStorage.getItem('mcs_email_subs') || '[]'); } catch (e) {}
+      document.getElementById('summary').textContent = JSON.stringify({ analytics: s.counts, totalEvents: s.total, emailSubs: subs.length, emails: subs }, null, 2);
+    }
+    document.getElementById('btn-export').onclick = function () { MCSAnalytics.exportJSON(); };
+    document.getElementById('btn-refresh').onclick = show;
+    show();
+  </script>
+</body>
+</html>

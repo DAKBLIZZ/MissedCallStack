@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculator Methodology &amp; Assumptions | MissedCallStack</title>
+  <meta name="description" content="Transparent formulas and assumptions for the MissedCallStack missed-call revenue calculator. Estimates only — not guarantees.">
+  <link rel="canonical" href="../methodology/">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <aside class="ftc-disclosure" role="note">
+    <strong>Affiliate disclosure:</strong> MissedCallStack may earn a commission if you subscribe to HighLevel via links on this site. Calculator outputs are <strong>estimates under stated assumptions — never guarantees</strong> of revenue, ROI, or bookings.
+  </aside>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../">
+        <span class="brand-name">MissedCallStack</span>
+        <span class="brand-tag">Home-service marketing stack notes (Jobber + HighLevel)</span>
+      </a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <a href="../">Calculator</a>
+        <a href="../ghl-jobber-stack/">GHL + Jobber</a>
+        <a href="../missed-call-text-back/">Text-back setup</a>
+        <a href="../ghl-vs-answering-service/">vs Answering</a>
+        <a href="../methodology/" aria-current="page">Methodology</a>
+        <a class="nav-cta" data-affiliate="header" href="https://www.gohighlevel.com/">Try HighLevel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../">Home</a></li>
+        <li aria-current="page">Methodology</li>
+      </ol>
+    </nav>
+
+    <h1>Calculator methodology</h1>
+    <p class="lede">Every output on MissedCallStack is an estimate derived from inputs you control. If an assumption is wrong for your shop, change it. We do not invent testimonials or promise recovery.</p>
+
+    <h2>Core formulas</h2>
+    <div class="card">
+      <p><strong>Missed calls / mo</strong> = inbound calls × (miss rate ÷ 100)</p>
+      <p><strong>Monthly revenue at risk</strong> = missed calls × (live booking rate ÷ 100) × average ticket</p>
+      <p><strong>Annual revenue at risk</strong> = monthly at risk × 12</p>
+      <p><strong>Monthly recovered (text-back)</strong> = monthly at risk × recovery rate × after-hours weight</p>
+      <p style="margin-bottom:0">where after-hours weight = 0.85 + (after-hours share × 0.15), then capped so recovered ≤ at risk.</p>
+    </div>
+    <p>The after-hours weight slightly emphasizes shops with more nights/weekend volume (where automation matters more). It does not invent extra revenue beyond the at-risk pool.</p>
+
+    <h2>Recovery presets</h2>
+    <table class="compare-table">
+      <thead>
+        <tr><th>Preset</th><th>Rate</th><th>Intent</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Conservative</td><td>15%</td><td>Skeptical planning; weak copy or slow follow-up</td></tr>
+        <tr><td>Default</td><td>28%</td><td>Mid case if SMS is fast and booking link works</td></tr>
+        <tr><td>Optimistic</td><td>42%</td><td>Strong ops + high intent emergency mix — still not a promise</td></tr>
+        <tr><td>Custom</td><td>You choose</td><td>Use your own measured reply→book rate when you have it</td></tr>
+      </tbody>
+    </table>
+    <p>Recovery applies to <em>at-risk revenue</em>, not raw missed-call count. That keeps booking rate and ticket explicit.</p>
+
+    <h2>Break-even jobs</h2>
+    <p><strong>Break-even jobs / mo</strong> = (HighLevel plan price + SMS mid-band estimate) ÷ average ticket</p>
+    <p>Plan prices default to public list: <strong>$97</strong> Starter and <strong>$297</strong> Unlimited from <a href="https://www.gohighlevel.com/pricing/" rel="noopener noreferrer" target="_blank">gohighlevel.com/pricing</a>. Confirm live pricing; annual billing and add-ons differ. SMS mid-band uses ~$0.012 per segment as a planning placeholder (low ~$0.0075, high ~$0.02). Actual HighLevel/carrier usage fees vary.</p>
+    <p>If SMS volume is blank, we estimate segments ≈ missed calls × 2.</p>
+
+    <h2>Answering service comparison</h2>
+    <p>When “answering service” is selected:</p>
+    <ul>
+      <li>Cost = your entered monthly fee</li>
+      <li>Recovered ≈ missed calls × <strong>50%</strong> × live booking rate × ticket</li>
+      <li>Net ≈ recovered − cost</li>
+    </ul>
+    <p>The 50% catch rate is a <strong>deliberate simplification</strong> for side-by-side display — not industry gospel. Replace it mentally with your vendor’s answer rate if you know it. GHL net uses your text-back preset minus (plan + SMS mid).</p>
+
+    <h2>What we intentionally exclude</h2>
+    <ul>
+      <li>Income claims, “make $10k with GHL,” or fabricated case studies</li>
+      <li>Close rates on cold outbound (this tool is inbound-miss focused)</li>
+      <li>ServiceTitan/HCP-specific fee schedules</li>
+      <li>Tax, chargebacks, or no-show rates (you can lower ticket or booking rate to approximate)</li>
+    </ul>
+
+    <h2>Stack recommendation logic</h2>
+    <p>Copy is rules-based: always prefer keeping the selected field CRM for ops; recommend adding HighLevel for marketing/SMS; note native Jobber sync vs. Zapier/Make for other CRMs. It is guidance, not a personalized consultation.</p>
+
+    <p><a class="btn" href="../">Back to calculator</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../">Calculator</a>
+        <a href="../ghl-jobber-stack/">GHL + Jobber</a>
+        <a href="../missed-call-text-back/">Text-back</a>
+        <a href="../ghl-vs-answering-service/">vs Answering</a>
+        <a href="../methodology/">Methodology</a>
+      </nav>
+      <div class="footer-disclosures">
+        <p><strong>Affiliate disclosure:</strong> HighLevel links may pay commission. No guarantees.</p>
+        <p><strong>Privacy note:</strong> Static site; localStorage only for MVP capture/analytics.</p>
+        <p>© <span data-year>2026</span> MissedCallStack</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/config.js"></script>
+  <script src="../js/analytics.js"></script>
+  <script src="../js/site.js"></script>
+</body>
+</html>

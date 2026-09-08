@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Missed-Call Revenue Calculator for HVAC, Plumbing &amp; Electrical | MissedCallStack</title>
+  <meta name="description" content="Estimate revenue at risk from missed inbound calls and compare Jobber + HighLevel stack cost vs answering services. Conservative assumptions, no income guarantees.">
+  <link rel="canonical" href="">
+  <meta name="robots" content="index,follow">
+  <meta property="og:title" content="Home-Service Missed-Call Revenue &amp; Stack Cost Calculator">
+  <meta property="og:description" content="For contractors on Jobber, Housecall Pro, or ServiceTitan who need SMS and missed-call recovery without ripping out ops.">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "MissedCallStack Calculator",
+    "applicationCategory": "BusinessApplication",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "description": "Estimate missed-call revenue at risk and HighLevel stack break-even for home-service contractors."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does HighLevel replace Jobber for HVAC shops?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Keep Jobber (or Housecall Pro / ServiceTitan) for field ops—dispatch, job costing, invoices, and the tech app. Use HighLevel for marketing, SMS, calendars, and missed-call text-back. Official Jobber↔HighLevel sync covers client/contact fields, not jobs or notes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does this calculator guarantee?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nothing. All outputs are estimates based on your inputs and labeled assumptions. Recovery rates and tickets vary by market, season, and how well your team follows up."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much is HighLevel for a single shop?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "HighLevel publicly lists Starter at $97/month and Unlimited at $297/month, plus usage-based SMS and phone costs. Confirm current pricing on gohighlevel.com/pricing. A 14-day trial is advertised."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <aside class="ftc-disclosure" role="note">
+    <strong>Affiliate disclosure:</strong> MissedCallStack may earn a commission if you subscribe to HighLevel (GoHighLevel) through links on this site, at no extra cost to you. We are not owned by HighLevel or Jobber. Calculator outputs are <strong>estimates under your assumptions — not guarantees</strong> of revenue, bookings, or ROI.
+  </aside>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="">
+        <span class="brand-name">MissedCallStack</span>
+        <span class="brand-tag">Home-service marketing stack notes (Jobber + HighLevel)</span>
+      </a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <a href="" aria-current="page">Calculator</a>
+        <a href="ghl-jobber-stack/">GHL + Jobber</a>
+        <a href="missed-call-text-back/">Text-back setup</a>
+        <a href="ghl-vs-answering-service/">vs Answering</a>
+        <a href="methodology/">Methodology</a>
+        <a class="nav-cta" data-affiliate="header" href="https://www.gohighlevel.com/">Try HighLevel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wide">
+    <h1>Home-Service Missed-Call Revenue &amp; Stack Cost Calculator</h1>
+    <p class="lede">Built for HVAC, plumbing, and electrical shops already on Jobber, Housecall Pro, or ServiceTitan — who need a marketing/SMS layer for after-hours and missed-call recovery without tearing out ops.</p>
+
+    <p class="estimate-note"><strong>Estimates only.</strong> Change the recovery preset to conservative if you want a skeptical read. Nothing here promises income. <a href="methodology/">How the math works →</a></p>
+
+    <form id="calc-form" class="calc-form" novalidate>
+      <fieldset class="fieldset">
+        <legend>Shop profile</legend>
+        <div class="grid-2">
+          <div class="field">
+            <label for="trade">Trade</label>
+            <select id="trade" name="trade">
+              <option value="hvac" selected>HVAC</option>
+              <option value="plumbing">Plumbing</option>
+              <option value="electrical">Electrical</option>
+              <option value="multi">Multi-trade</option>
+              <option value="other">Other home service</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="crm">Field CRM / ops</label>
+            <select id="crm" name="crm">
+              <option value="jobber" selected>Jobber</option>
+              <option value="hcp">Housecall Pro</option>
+              <option value="servicetitan">ServiceTitan</option>
+              <option value="other">Other</option>
+              <option value="none">None yet</option>
+            </select>
+            <span class="hint">We recommend keeping your field CRM for jobs &amp; invoices.</span>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend>Call volume &amp; tickets</legend>
+        <div class="grid-2">
+          <div class="field">
+            <label for="calls">Inbound calls / month</label>
+            <input type="number" id="calls" name="calls" min="0" max="100000" step="1" value="180" required>
+            <span class="hint">Office + after-hours lines combined is fine.</span>
+          </div>
+          <div class="field">
+            <label for="miss-rate">Miss rate %</label>
+            <input type="number" id="miss-rate" name="miss-rate" min="0" max="100" step="1" value="25" required>
+            <span class="hint">Typical shops see 15–35% depending on season &amp; CSRs.</span>
+          </div>
+          <div class="field">
+            <label for="ticket">Average ticket $</label>
+            <input type="number" id="ticket" name="ticket" min="0" max="1000000" step="1" value="450" required>
+            <span class="hint">Booked job average — not every lead.</span>
+          </div>
+          <div class="field">
+            <label for="booking-live">Booking rate if answered live %</label>
+            <input type="number" id="booking-live" name="booking-live" min="0" max="100" step="1" value="55" required>
+            <span class="hint">Of calls you <em>do</em> answer, what % become jobs?</span>
+          </div>
+          <div class="field">
+            <label for="after-hours">After-hours / weekend share %</label>
+            <input type="number" id="after-hours" name="after-hours" min="0" max="100" step="1" value="30">
+            <span class="hint">Higher after-hours = more weight on automated recovery.</span>
+          </div>
+          <div class="field">
+            <label for="sms-vol">Optional: SMS segments / month</label>
+            <input type="number" id="sms-vol" name="sms-vol" min="0" max="1000000" step="1" value="" placeholder="Leave blank to estimate">
+            <span class="hint">If blank, we estimate ~2 texts per missed call.</span>
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="fieldset">
+        <legend>Recovery &amp; phone coverage</legend>
+        <div class="grid-2">
+          <div class="field">
+            <label for="recovery-mode">Text-back recovery rate</label>
+            <select id="recovery-mode" name="recovery-mode">
+              <option value="conservative">Conservative (15%)</option>
+              <option value="default" selected>Default (28%)</option>
+              <option value="optimistic">Optimistic (42%)</option>
+              <option value="custom">Custom…</option>
+            </select>
+            <span class="hint">% of <em>at-risk revenue</em> you expect to win back with fast SMS + booking link.</span>
+          </div>
+          <div class="field" id="recovery-custom-wrap" style="display:none">
+            <label for="recovery-custom">Custom recovery %</label>
+            <input type="number" id="recovery-custom" name="recovery-custom" min="0" max="100" step="1" value="20">
+          </div>
+          <div class="field">
+            <label for="coverage">Phone coverage today</label>
+            <select id="coverage" name="coverage">
+              <option value="voicemail" selected>Voicemail only</option>
+              <option value="answering">Answering service</option>
+              <option value="none">Often goes unanswered</option>
+            </select>
+          </div>
+          <div class="field" id="answering-cost-wrap" style="display:none">
+            <label for="answering-cost">Answering service $ / month</label>
+            <input type="number" id="answering-cost" name="answering-cost" min="0" max="50000" step="1" value="350">
+          </div>
+          <div class="field">
+            <label for="ghl-plan">HighLevel plan to model</label>
+            <select id="ghl-plan" name="ghl-plan">
+              <option value="97" selected>Starter — $97/mo</option>
+              <option value="297">Unlimited — $297/mo</option>
+            </select>
+            <span class="hint">Public list prices; confirm on <a href="https://www.gohighlevel.com/pricing/" rel="noopener noreferrer" target="_blank">gohighlevel.com/pricing</a>.</span>
+          </div>
+        </div>
+      </fieldset>
+
+      <div class="btn-row">
+        <button type="submit" class="btn">Calculate estimates</button>
+        <a class="btn btn-secondary" href="methodology/">Read assumptions</a>
+      </div>
+    </form>
+
+    <section id="results" class="results" aria-live="polite">
+      <h2>Your estimates</h2>
+      <p id="assumptions-line" class="estimate-note"></p>
+
+      <div class="grid-3">
+        <div class="card stat">
+          <div class="stat-value" id="out-at-risk-mo">—</div>
+          <div class="stat-label">Est. monthly revenue at risk</div>
+        </div>
+        <div class="card stat">
+          <div class="stat-value" id="out-recovered-mo">—</div>
+          <div class="stat-label">Est. monthly recovered (text-back)</div>
+        </div>
+        <div class="card stat">
+          <div class="stat-value" id="out-missed">—</div>
+          <div class="stat-label">Missed calls modeled</div>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card stat">
+          <div class="stat-value" id="out-at-risk-yr">—</div>
+          <div class="stat-label">Est. annual revenue at risk</div>
+        </div>
+        <div class="card stat">
+          <div class="stat-value" id="out-recovered-yr">—</div>
+          <div class="stat-label">Est. annual recovered</div>
+        </div>
+      </div>
+
+      <h3>Break-even jobs (plan + SMS mid-band)</h3>
+      <div class="grid-2">
+        <div class="card">
+          <strong>$97 Starter</strong>
+          <p id="out-be-97" style="font-size:1.35rem;font-weight:700;margin:0.35rem 0">—</p>
+          <p class="hint" style="margin:0;color:var(--muted);font-size:0.85rem">Jobs/mo at your avg ticket to cover plan + estimated SMS.</p>
+        </div>
+        <div class="card">
+          <strong>$297 Unlimited</strong>
+          <p id="out-be-297" style="font-size:1.35rem;font-weight:700;margin:0.35rem 0">—</p>
+          <p class="hint" style="margin:0;color:var(--muted);font-size:0.85rem">Same math at Unlimited list price.</p>
+        </div>
+      </div>
+      <p><strong>SMS cost band (estimate):</strong> <span id="out-sms-band">—</span>. Carrier/A2P rates vary; HighLevel usage fees are separate from the subscription.</p>
+
+      <div class="recommend" id="stack-rec">
+        <h3>Stack recommendation</h3>
+        <p><strong>Trade:</strong> <span id="rec-trade">—</span> · <strong>Keep ops in:</strong> <span id="rec-crm">—</span></p>
+        <p id="rec-keep"></p>
+        <p id="rec-add"></p>
+        <p id="rec-plan"></p>
+        <p><a href="ghl-jobber-stack/">What syncs between Jobber and HighLevel →</a></p>
+      </div>
+
+      <h3>Answering service vs HighLevel <span style="font-weight:500;font-size:0.9rem;color:var(--muted)">(labeled assumptions)</span></h3>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>Model</th>
+            <th>Est. monthly cost</th>
+            <th>Est. recovered revenue</th>
+            <th>Est. net</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Answering service</td>
+            <td id="cmp-ans-cost">—</td>
+            <td id="cmp-ans-rec">—</td>
+            <td id="cmp-ans-net">—</td>
+          </tr>
+          <tr>
+            <td>HighLevel + SMS (mid)</td>
+            <td id="cmp-ghl-cost">—</td>
+            <td id="cmp-ghl-rec">—</td>
+            <td id="cmp-ghl-net">—</td>
+          </tr>
+        </tbody>
+        <caption>
+          Answering recovery assumes ~50% of the miss pool is caught live when an answering service is selected — a simplification. GHL recovery uses your text-back preset. Neither is a promise. See <a href="ghl-vs-answering-service/">full comparison notes</a>.
+        </caption>
+      </table>
+
+      <div class="btn-row">
+        <button type="button" class="btn btn-secondary" id="btn-download">Download results (.txt)</button>
+        <button type="button" class="btn btn-secondary" id="btn-print">Print summary</button>
+        <a class="btn" data-affiliate="calculator_results" href="https://www.gohighlevel.com/">Open HighLevel (affiliate link)</a>
+      </div>
+
+      <div class="email-capture">
+        <h3>Get the 7-day missed-call SOP</h3>
+        <p>Practical checklist for HVAC/plumbing shops: number routing, GHL workflow outline, Jobber handoff, and first-week QA. Free. No spam pitch deck.</p>
+        <form data-email-capture="calculator_sop" novalidate>
+          <div class="field">
+            <label for="sop-email">Work email</label>
+            <input type="email" id="sop-email" name="email" required autocomplete="email" placeholder="you@yourhvacco.com">
+            <p class="form-error" role="alert"></p>
+          </div>
+          <button type="submit" class="btn">Save my request</button>
+          <p class="form-success" role="status"></p>
+          <p class="hint" style="margin-top:0.75rem;color:var(--muted);font-size:0.8rem">MVP stores your email in this browser’s localStorage only. Kit/Formspree can be wired later at $0 tiers. Use mailto fallback on success if you want a copy in your inbox.</p>
+        </form>
+      </div>
+    </section>
+
+    <section class="faq" aria-labelledby="faq-h">
+      <h2 id="faq-h">FAQ</h2>
+      <details>
+        <summary>Does HighLevel replace Jobber?</summary>
+        <p>No. Keep Jobber (or HCP / ServiceTitan) for field ops. Use GHL for marketing, SMS, and missed-call recovery. <a href="ghl-jobber-stack/">Integration details</a>.</p>
+      </details>
+      <details>
+        <summary>Are these numbers guaranteed?</summary>
+        <p>No. They are estimates from your inputs. Markets, seasonality, lead quality, and follow-up discipline change outcomes.</p>
+      </details>
+      <details>
+        <summary>Where do HighLevel prices come from?</summary>
+        <p>Public list prices on <a href="https://www.gohighlevel.com/pricing/" rel="noopener noreferrer" target="_blank">gohighlevel.com/pricing</a> (Starter $97, Unlimited $297 monthly as of our last check). SMS/phone are usage-based.</p>
+      </details>
+    </section>
+
+    <aside class="related">
+      <strong>Money cluster</strong>
+      <ul>
+        <li><a href="ghl-jobber-stack/">GoHighLevel + Jobber: what syncs, what doesn’t</a></li>
+        <li><a href="missed-call-text-back/">Missed-call text-back setup for HVAC</a></li>
+        <li><a href="ghl-vs-answering-service/">GHL vs answering service cost &amp; recovery math</a></li>
+        <li><a href="methodology/">Calculator methodology</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="">Calculator</a>
+        <a href="ghl-jobber-stack/">GHL + Jobber</a>
+        <a href="missed-call-text-back/">Text-back</a>
+        <a href="ghl-vs-answering-service/">vs Answering</a>
+        <a href="methodology/">Methodology</a>
+      </nav>
+      <div class="footer-disclosures">
+        <p><strong>Affiliate disclosure:</strong> Links to HighLevel may be affiliate links. We may earn a commission if you purchase. We do not guarantee income, recovery rates, or software results.</p>
+        <p><strong>Privacy note:</strong> This static site does not run a server-side database. Email capture MVP uses your browser’s localStorage. First-party analytics events are stored locally (exportable as JSON). No sale of personal data.</p>
+        <p>Jobber, Housecall Pro, ServiceTitan, and HighLevel are trademarks of their respective owners. MissedCallStack is an independent resource.</p>
+        <p>© <span data-year>2026</span> MissedCallStack · Not affiliated with HighLevel LLC beyond optional affiliate participation.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/analytics.js"></script>
+  <script src="js/site.js"></script>
+  <script src="js/calculator.js"></script>
+</body>
+</html>
