@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>After-Hours Emergency Call Routing for HVAC with GoHighLevel | MissedCallStack</title>
+  <meta name="description" content="Practical after-hours HVAC call routing with HighLevel: urgency triage, on-call notify, missed-call SMS, Jobber handoff, and hybrid answering-service options. Educational — not a guarantee of bookings.">
+  <link rel="canonical" href="../after-hours-hvac-routing/">
+  <meta name="robots" content="index,follow">
+  <link rel="stylesheet" href="../css/styles.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "After-hours emergency call routing for HVAC with HighLevel",
+    "description": "Route after-hours HVAC calls with HighLevel SMS and on-call notify while keeping Jobber for field operations.",
+    "step": [
+      { "@type": "HowToStep", "name": "Write a one-page after-hours policy" },
+      { "@type": "HowToStep", "name": "Map every public number into a clean path" },
+      { "@type": "HowToStep", "name": "Define urgency keywords and queues" },
+      { "@type": "HowToStep", "name": "Build missed-call SMS + on-call notify in HighLevel" },
+      { "@type": "HowToStep", "name": "Hand booked emergencies into Jobber" },
+      { "@type": "HowToStep", "name": "Run a seven-night QA drill" }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <aside class="ftc-disclosure" role="note">
+    <strong>Affiliate disclosure:</strong> MissedCallStack may earn a commission if you subscribe to HighLevel through links on this page. Routing guidance is educational. Results depend on your market, staffing, and compliance. <strong>Not a guarantee</strong> of bookings, response times, or revenue. This is not legal or emergency-services advice.
+  </aside>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="../">
+        <span class="brand-name">MissedCallStack</span>
+        <span class="brand-tag">Home-service marketing stack notes (Jobber + HighLevel)</span>
+      </a>
+      <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="nav" id="site-nav" aria-label="Primary">
+        <a href="../">Calculator</a>
+        <a href="../ghl-jobber-stack/">GHL + Jobber</a>
+        <a href="../missed-call-text-back/">Text-back setup</a>
+        <a href="../ghl-vs-answering-service/">vs Answering</a>
+        <a href="../methodology/">Methodology</a>
+        <a class="nav-cta" data-affiliate="header" href="https://www.gohighlevel.com/">Try HighLevel</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="../">Home</a></li>
+        <li aria-current="page">After-hours HVAC routing</li>
+      </ol>
+    </nav>
+
+    <h1>After-hours emergency call routing for HVAC with GHL</h1>
+    <p class="lede">At 9:15 p.m. in July, “missed call” is not a CRM metric — it is a no-cool homeowner deciding which shop gets the morning slot. HighLevel can own the <strong>first digital response</strong> and on-call ping; Jobber still owns the truck. This page is the routing playbook between those two systems.</p>
+
+    <p class="estimate-note"><strong>Safety &amp; compliance:</strong> Gas smell, CO alarm, electrical sparking, or medical distress → instruct callers to use emergency services where appropriate. Register A2P / brand for SMS, honor STOP, and get consent where required. This is not legal advice. Carrier filtering punishes spammy after-hours copy.</p>
+
+    <h2>What “good routing” means for HVAC nights</h2>
+    <div class="grid-2">
+      <div class="card">
+        <h3>True after-hours emergency</h3>
+        <ul>
+          <li>No heat in freezing weather / no cool for medically vulnerable</li>
+          <li>Active leak at the air handler or condensate overflow risking damage</li>
+          <li>System dead after a storm with food-safety or occupancy risk</li>
+        </ul>
+        <p style="margin:0.75rem 0 0;font-size:0.9rem;color:var(--muted)">Goal: human on-call notified fast; SMS acknowledges; Jobber job created once triage is clear.</p>
+      </div>
+      <div class="card">
+        <h3>Urgent but bookable</h3>
+        <ul>
+          <li>AC weak, strange noise, thermostat confusion</li>
+          <li>Filter / maintenance requests that can wait until open</li>
+          <li>Estimate-only shopping calls</li>
+        </ul>
+        <p style="margin:0.75rem 0 0;font-size:0.9rem;color:var(--muted)">Goal: text-back + booking link or next-morning CSR queue — do not wake a tech for a filter.</p>
+      </div>
+    </div>
+    <p>Write that split in one sentence your owner, CSR, and on-call tech sign. If the policy only lives in someone’s head, GHL workflows will disagree with the truck by week two.</p>
+
+    <h2>Recommended night path (GHL + Jobber)</h2>
+    <ol class="steps">
+      <li>
+        <h3>Write a one-page after-hours policy</h3>
+        <p>Include: office hours, who is on-call this week, what counts as roll-tonight vs. first-thing, after-hours fees (if any), and the SMS promise you will actually keep (“callback within 15 minutes” only if you mean it). Tape it next to the phone and paste it into the GHL workflow notes.</p>
+      </li>
+      <li>
+        <h3>Map every public number into a clean path</h3>
+        <p>Inventory Google Business Profile, LSA, website click-to-call, truck magnets, and yard signs. Marketing and after-hours overflow should forward into a HighLevel number (or ring group) that can fire missed-call workflows. Known-customer DIDs can still hit the office/on-call cell if you prefer — document the diagram so nobody “fixes” forwarding at 2 a.m. Phone/SMS usage fees apply; see <a href="https://www.gohighlevel.com/pricing/" rel="noopener noreferrer" target="_blank">HighLevel pricing</a> and usage docs.</p>
+      </li>
+      <li>
+        <h3>Define urgency keywords and queues</h3>
+        <p>In the first SMS, offer clear replies: <code>URGENT</code>, <code>YES</code> (callback), booking link, <code>STOP</code>. Branch the workflow:</p>
+        <ul>
+          <li><strong>URGENT</strong> → notify on-call immediately (GHL app + SMS to manager cell) + create opportunity in an “After-Hours Emergency” pipeline stage.</li>
+          <li><strong>YES / book</strong> → CSR morning queue or calendar for next open diagnostic; tag <code>after-hours-non-emergency</code>.</li>
+          <li><strong>No reply</strong> → one softer follow-up next morning only (avoid harassing overnight).</li>
+        </ul>
+      </li>
+      <li>
+        <h3>Build missed-call SMS + on-call notify in HighLevel</h3>
+        <p>Reuse the skeleton from the <a href="../missed-call-text-back/">text-back setup guide</a>, then harden it for nights:</p>
+        <ul>
+          <li>Trigger on missed call / voicemail on the after-hours path.</li>
+          <li>Wait 30–90 seconds to avoid double-texting redialers.</li>
+          <li>Skip if <code>do-not-sms</code> or a text went out in the last 10 minutes.</li>
+          <li>Send a short contractor-sounding SMS (template below).</li>
+          <li>Notify on-call; escalate to backup after N minutes with no acknowledgment if your team can support it.</li>
+        </ul>
+        <div class="card">
+          <p style="margin:0"><strong>Example after-hours SMS (edit hard):</strong></p>
+          <p style="font-family:var(--mono);font-size:0.9rem;margin:0.75rem 0">Hi — {{contact.company_name}} missed your call after hours. Reply URGENT for no-heat/no-cool emergencies (we’ll alert on-call). Reply YES for a morning callback, or book: {{booking_link}}. For gas smell or CO alarm, call emergency services. Reply STOP to opt out.</p>
+          <p style="margin:0;font-size:0.85rem;color:var(--muted)">Never promise “tech in 20 minutes” unless winter staffing makes that true. Name the trade. Keep segments short to control SMS cost.</p>
+        </div>
+      </li>
+      <li>
+        <h3>Hand booked emergencies into Jobber</h3>
+        <p>Ops stays in Jobber: on-call or morning CSR confirms address, system type, access, and fee expectations, then creates the request/job and assigns the truck there. If you use the official Jobber↔HighLevel connection, contact fields can sync — jobs, notes, and attachments do not (<a href="../ghl-jobber-stack/">sync details</a>). Tag the GHL contact <code>booked</code> / <code>rolled-tonight</code> so nurture stops.</p>
+      </li>
+      <li>
+        <h3>Run a seven-night QA drill</h3>
+        <ul>
+          <li>Miss a call to the ads number from a personal cell on at least three nights.</li>
+          <li>Reply URGENT once and YES once — confirm the right human is notified.</li>
+          <li>Verify STOP, booking link on iOS/Android, and no duplicate contacts.</li>
+          <li>Log: missed → text → reply → Jobber job. If URGENT never reaches a phone that is awake, the workflow is theater.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h2>When to keep a live answering service in the mix</h2>
+    <p>GHL text-back is excellent at speed and written record. It is weaker when the caller will not text, needs voice reassurance, or your insurance/dispatch culture demands a live agent. Common hybrid:</p>
+    <ul>
+      <li><strong>Answering service</strong> answers live for true voice triage on the main after-hours line.</li>
+      <li><strong>HighLevel</strong> owns SMS on missed marketing calls, voicemail drops, daytime overflow, and the CRM trail into Jobber.</li>
+    </ul>
+    <p>Do not cancel answering on day one of a GHL trial in peak season. Model both on the <a href="../ghl-vs-answering-service/">comparison page</a> and the <a href="../">calculator</a> — outputs are estimates only. All-in software cost context for a mid-size shop: <a href="../ghl-pricing-5-truck/">5-truck GHL pricing</a>.</p>
+
+    <h2>Plumbing &amp; electrical notes</h2>
+    <p><strong>Plumbing:</strong> route burst / slab leak / sewer backup like HVAC URGENT; clogged sink usually books morning. <strong>Electrical:</strong> never coach DIY on live panels in SMS; push sparking / burning smell to emergency services + on-call. Same GHL skeleton; change keywords and calendars.</p>
+
+    <h2>FAQ</h2>
+    <div class="faq">
+      <details>
+        <summary>Should on-call live inside the HighLevel mobile app?</summary>
+        <p>They need <em>notifications</em> that wake them — GHL app, SMS to cell, or both. Building jobs still happens in Jobber. Do not ask techs to run the whole night out of a marketing CRM.</p>
+      </details>
+      <details>
+        <summary>How many follow-up texts after midnight?</summary>
+        <p>Prefer one acknowledgment overnight. Pile-on SMS feels like spam, burns usage budget, and hurts deliverability. Continue in the morning if they have not booked.</p>
+      </details>
+      <details>
+        <summary>Where does calendar booking fit?</summary>
+        <p>Great for non-emergency diagnostics and morning first-available. For roll-tonight emergencies, a human confirm beats an open self-serve calendar that overbooks a single on-call tech.</p>
+      </details>
+    </div>
+
+    <div class="btn-row">
+      <a class="btn" data-affiliate="afterhours_page" href="https://www.gohighlevel.com/">Start HighLevel trial (affiliate)</a>
+      <a class="btn btn-secondary" href="../missed-call-text-back/">Full text-back setup steps</a>
+    </div>
+
+    <aside class="related">
+      <strong>Related</strong>
+      <ul>
+        <li><a href="../missed-call-text-back/">Missed-call text-back setup for HVAC</a></li>
+        <li><a href="../ghl-pricing-5-truck/">GHL all-in pricing for a 5-truck shop</a></li>
+        <li><a href="../ghl-vs-answering-service/">GHL vs answering service</a></li>
+        <li><a href="../ghl-jobber-stack/">GHL + Jobber sync</a></li>
+        <li><a href="../">Missed-call revenue calculator</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="../">Calculator</a>
+        <a href="../ghl-jobber-stack/">GHL + Jobber</a>
+        <a href="../missed-call-text-back/">Text-back</a>
+        <a href="../ghl-vs-answering-service/">vs Answering</a>
+        <a href="../ghl-pricing-5-truck/">5-truck pricing</a>
+        <a href="../after-hours-hvac-routing/">After-hours routing</a>
+        <a href="../methodology/">Methodology</a>
+      </nav>
+      <div class="footer-disclosures">
+        <p><strong>Affiliate disclosure:</strong> HighLevel links may pay a commission. No income or booking guarantees. Educational content only.</p>
+        <p><strong>Privacy note:</strong> Static site; localStorage for email MVP and analytics events.</p>
+        <p>© <span data-year>2026</span> MissedCallStack</p>
+      </div>
+    </div>
+  </footer>
+  <script src="../js/config.js"></script>
+  <script src="../js/analytics.js"></script>
+  <script src="../js/site.js"></script>
+</body>
+</html>
