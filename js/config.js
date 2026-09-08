@@ -1,16 +1,12 @@
 /**
  * MissedCallStack — site config
  *
- * AFFILIATE_LINK: Replace PLACEHOLDER with the real HighLevel affiliate ref.
- * Pattern: https://www.gohighlevel.com/?fp_ref=YOUR_REF
- * Until then, the link goes to the public HighLevel homepage (no commission tracking).
+ * AFFILIATE_LINK: HighLevel referral link used by all [data-affiliate] CTAs.
  */
 window.MCS_CONFIG = Object.freeze({
   siteName: 'MissedCallStack',
   siteTagline: 'Home-service marketing stack notes (Jobber + HighLevel)',
-  AFFILIATE_LINK: 'https://www.gohighlevel.com/?fp_ref=PLACEHOLDER',
-  // When you have the real ref, set AFFILIATE_LINK to e.g.:
-  // 'https://www.gohighlevel.com/?fp_ref=YOUR_REF'
+  AFFILIATE_LINK: 'https://www.gohighlevel.com/?fp_ref=dakota-428143',
   ghlPricingStarter: 97,
   ghlPricingUnlimited: 297,
   ghlTrialDays: 14,

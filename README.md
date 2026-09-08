@@ -17,13 +17,11 @@ Static niche site for home-service contractors (HVAC / plumbing / electrical) wh
 
 ## Affiliate link
 
-Edit `js/config.js`:
+All HighLevel CTAs use `js/config.js`:
 
 ```js
-AFFILIATE_LINK: 'https://www.gohighlevel.com/?fp_ref=YOUR_REAL_REF',
+AFFILIATE_LINK: 'https://www.gohighlevel.com/?fp_ref=dakota-428143',
 ```
-
-Until replaced, CTAs use `PLACEHOLDER` (no valid commission tracking).
 
 ## Local
 
